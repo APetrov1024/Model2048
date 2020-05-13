@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Model2048
 {
+#if DEBUG
+    public
+#endif
     class Field
     {
         private int[,] field;

@@ -329,6 +329,21 @@ namespace Model2048
 
         }
 
-     
+
+#region AccessMethodsForTests
+#if DEBUG
+        public Field ForTestsOnly_Field
+        {
+            get 
+            {
+                return this.field;
+            }
+            set
+            {
+                this.field = value;
+            }
+        }
+#endif
+#endregion
     }
 }
