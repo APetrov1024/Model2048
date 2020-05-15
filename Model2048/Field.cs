@@ -81,5 +81,24 @@ namespace Model2048
             if (IsOnField(coords))
                 this.field[coords.Horizontal, coords.Vertical] = value;
         }
+
+        #region AccessMethodsForTests
+#if DEBUG
+        public int[,] ForTestsOnly_FieldArray
+        {
+            get
+            {
+                return this.field;
+            }
+            set
+            {
+                if (value.GetLength(0) == this.HSize && value.GetLength(1) == this.VSize)
+                    this.field = value;
+                else
+                    throw new ArgumentException();
+            }
+        }
+#endif
+        #endregion
     }
 }
