@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Dynamic;
 
 namespace Model2048
 {
@@ -13,9 +14,22 @@ namespace Model2048
         private Field field;
         private Random rndNum = new Random();
         private bool isMoved;
+        private int targetValue;
 
         public Coordinates LastGeneratedTileCoords { get; private set; }
         public int Score { get; private set; }
+        public int TargetValue
+        {
+            get
+            { 
+                return this.targetValue;
+            }
+            set 
+            {
+                if (value != this.targetValue)
+                    this.targetValue = value;
+            }
+        }
         public int HSize
         {
             get
@@ -341,6 +355,21 @@ namespace Model2048
 
         }
 
+        public bool IsWin()
+        {
+            if (this.IsHaveValue(this.TargetValue))
+                return true;
+            else
+                return false;
+        }
+
+        public bool IsFail()
+        {
+            if (this.IsHasNotMoves() && !this.IsHaveValue(this.targetValue))
+                return true;
+            else
+                return false;
+        }
 
 #region AccessMethodsForTests
 #if DEBUG
