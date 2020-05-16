@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model2048", "Model2048\Model2048.csproj", "{41B15752-01CD-4079-84EE-5024C91FFF36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model2048_Tests", "ModelTests\Model2048_Tests.csproj", "{C4B99EF2-3A59-46EA-8B80-703C0694566E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model2048_Tests", "ModelTests\Model2048_Tests.csproj", "{C4B99EF2-3A59-46EA-8B80-703C0694566E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,7 +20,6 @@ Global
 		{C4B99EF2-3A59-46EA-8B80-703C0694566E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C4B99EF2-3A59-46EA-8B80-703C0694566E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4B99EF2-3A59-46EA-8B80-703C0694566E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C4B99EF2-3A59-46EA-8B80-703C0694566E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

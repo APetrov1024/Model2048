@@ -41,6 +41,7 @@ namespace ModelTests
             Assert.AreEqual(3, model.HSize);
             Assert.AreEqual(3, model.VSize);
             Assert.AreEqual(2, CountNonZeroValuesOnField(model.ForTestsOnly_Field));
+            Assert.AreEqual(0, model.Score);
         }
         [TestMethod]
         public void TwoParamsConstructorTest()
@@ -49,6 +50,7 @@ namespace ModelTests
             Assert.AreEqual(3, model.HSize);
             Assert.AreEqual(2, model.VSize);
             Assert.AreEqual(2, CountNonZeroValuesOnField(model.ForTestsOnly_Field));
+            Assert.AreEqual(0, model.Score);
         }
         #endregion
         #region IsHaveValue
@@ -127,6 +129,7 @@ namespace ModelTests
             model.Action(Model.Directions.Down);
             Assert.IsTrue(IsFieldArraysEqual(fieldData, model.ForTestsOnly_Field.ForTestsOnly_FieldArray));
         }
+        [TestMethod]
         public void ActionTest_Down_WithTwoMerges()
         {
             Model model = new Model(4);
@@ -136,6 +139,15 @@ namespace ModelTests
             model.ForTestsOnly_Field.Set(model.LastGeneratedTileCoords, 0);
             int[,] expected = { { 0, 0, 4, 4 }, { 0, 0, 8, 16 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
             Assert.IsTrue(IsFieldArraysEqual(expected, model.ForTestsOnly_Field.ForTestsOnly_FieldArray));
+        }
+        [TestMethod]
+        public void ActionTest_Down_WithMerges_ScoresUpdated()
+        {
+            Model model = new Model(3);
+            int[,] fieldData = { { 2, 2, 2 }, { 4, 4, 8 }, { 0, 0, 0 } };
+            model.ForTestsOnly_Field.ForTestsOnly_FieldArray = fieldData;
+            model.Action(Model.Directions.Down);
+            Assert.AreEqual(12, model.Score);
         }
         #endregion
         #region Action_Up
@@ -200,6 +212,15 @@ namespace ModelTests
             int[,] expected = { { 4, 4, 0, 0 }, { 8, 16, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
             Assert.IsTrue(IsFieldArraysEqual(expected, model.ForTestsOnly_Field.ForTestsOnly_FieldArray));
         }
+        [TestMethod]
+        public void ActionTest_Up_WithMerges_ScoresUpdated()
+        {
+            Model model = new Model(3);
+            int[,] fieldData = { { 2, 2, 2 }, { 4, 4, 8 }, { 0, 0, 0 } };
+            model.ForTestsOnly_Field.ForTestsOnly_FieldArray = fieldData;
+            model.Action(Model.Directions.Up);
+            Assert.AreEqual(12, model.Score);
+        }
         #endregion
         #region Action_Left
         [TestMethod]
@@ -262,6 +283,15 @@ namespace ModelTests
             model.ForTestsOnly_Field.Set(model.LastGeneratedTileCoords, 0);
             int[,] expected = { { 4, 8, 0, 0 }, { 4, 16, 0, 0 }, { 0, 0, 0, 0 }, { 0, 0, 0, 0 } };
             Assert.IsTrue(IsFieldArraysEqual(expected, model.ForTestsOnly_Field.ForTestsOnly_FieldArray));
+        }
+        [TestMethod]
+        public void ActionTest_Left_WithMerges_ScoresUpdated()
+        {
+            Model model = new Model(3);
+            int[,] fieldData = { { 2, 4, 0 }, { 2, 4, 0 }, { 0, 0, 0 } };
+            model.ForTestsOnly_Field.ForTestsOnly_FieldArray = fieldData;
+            model.Action(Model.Directions.Left);
+            Assert.AreEqual(12, model.Score);
         }
         #endregion
         #region Action_Right
@@ -326,6 +356,15 @@ namespace ModelTests
             int[,] expected = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 }, { 4, 8, 0, 0 }, { 4, 16, 0, 0 } };
             Assert.IsTrue(IsFieldArraysEqual(expected, model.ForTestsOnly_Field.ForTestsOnly_FieldArray));
         }
+        [TestMethod]
+        public void ActionTest_Right_WithMerges_ScoresUpdated()
+        {
+            Model model = new Model(3);
+            int[,] fieldData = { { 2, 4, 0 }, { 2, 4, 0 }, { 0, 0, 0 } };
+            model.ForTestsOnly_Field.ForTestsOnly_FieldArray = fieldData;
+            model.Action(Model.Directions.Right);
+            Assert.AreEqual(12, model.Score);
+        }
         #endregion
         #region ClearField
         [TestMethod]
@@ -336,6 +375,7 @@ namespace ModelTests
             model.ForTestsOnly_Field.ForTestsOnly_FieldArray = fieldData;
             model.ClearField();
             Assert.AreEqual(2, CountNonZeroValuesOnField(model.ForTestsOnly_Field));
+            Assert.AreEqual(0, model.Score);
         }
         #endregion
         #region IsHasNotMoves

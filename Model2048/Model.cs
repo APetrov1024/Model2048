@@ -15,6 +15,7 @@ namespace Model2048
         private bool isMoved;
 
         public Coordinates LastGeneratedTileCoords { get; private set; }
+        public int Score { get; private set; }
         public int HSize
         {
             get
@@ -29,6 +30,7 @@ namespace Model2048
                 return this.field.VSize;
             }
         }
+
 
         public Model(int fieldSize)
         {
@@ -49,6 +51,7 @@ namespace Model2048
             this.field.Clear();
             GenerateNewTile();
             GenerateNewTile();
+            Score = 0;
         }
 
         public void ClearField()
@@ -68,6 +71,11 @@ namespace Model2048
             MergeTiles(direction);
             if (this.isMoved && this.field.HaveEmptyCells())
                 GenerateNewTile();
+        }
+
+        private void AddToScore(int value)
+        {
+            this.Score += 2 * value;
         }
 
         public bool IsHaveValue(int value)
@@ -140,6 +148,7 @@ namespace Model2048
                     {
                         this.field.Set(curCoords, 2 * curValue);
                         this.field.Set(nextCoords, 0);
+                        AddToScore(curValue);
                         this.isMoved = true;
                     }
                 }
@@ -160,6 +169,7 @@ namespace Model2048
                     {
                         this.field.Set(curCoords, 2 * curValue);
                         this.field.Set(nextCoords, 0);
+                        AddToScore(curValue);
                         this.isMoved = true;
                     }
                 }
@@ -180,6 +190,7 @@ namespace Model2048
                     {
                         this.field.Set(curCoords, 2 * curValue);
                         this.field.Set(nextCoords, 0);
+                        AddToScore(curValue);
                         this.isMoved = true;
                     }
                 }
@@ -200,6 +211,7 @@ namespace Model2048
                     {
                         this.field.Set(curCoords, 2 * curValue);
                         this.field.Set(nextCoords, 0);
+                        AddToScore(curValue);
                         this.isMoved = true;
                     }
                 }
