@@ -15,7 +15,7 @@ namespace Model2048
         private Random rndNum = new Random();
         private bool isMoved;
         private int targetValue;
-
+        private bool gameContinued;
         public Coordinates LastGeneratedTileCoords { get; private set; }
         public int Score { get; private set; }
         public int TargetValue
@@ -75,7 +75,8 @@ namespace Model2048
             this.field.Clear();
             GenerateNewTile();
             GenerateNewTile();
-            Score = 0;
+            this.Score = 0;
+            this.gameContinued = false;
         }
 
         public void ClearField()
@@ -368,14 +369,18 @@ namespace Model2048
         public bool IsWin()
         {
             if (this.IsHaveValue(this.TargetValue))
+            {
+                if (!this.gameContinued)
+                    this.gameContinued = true;
                 return true;
+            }
             else
                 return false;
         }
 
         public bool IsFail()
         {
-            if (this.IsHasNotMoves() && !this.IsHaveValue(this.targetValue))
+            if (this.IsHasNotMoves() && (!this.IsHaveValue(this.targetValue) || this.gameContinued))
                 return true;
             else
                 return false;
