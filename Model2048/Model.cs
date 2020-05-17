@@ -51,6 +51,7 @@ namespace Model2048
             this.field = new Field(fieldSize);
             this.LastGeneratedTileCoords = new Coordinates();
             InitField();
+            this.TargetValue = 2048;
         }
 
         public Model(int hFieldSize, int vFieldSize)
@@ -58,6 +59,15 @@ namespace Model2048
             this.field = new Field(hFieldSize, vFieldSize);
             this.LastGeneratedTileCoords = new Coordinates();
             InitField();
+            this.TargetValue = 2048;
+        }
+
+        public Model(int hFieldSize, int vFieldSize, int targetValue)
+        {
+            this.field = new Field(hFieldSize, vFieldSize);
+            this.LastGeneratedTileCoords = new Coordinates();
+            InitField();
+            this.TargetValue = targetValue;
         }
 
         private void InitField()
